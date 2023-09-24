@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youlhafi <youlhafi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhabib-a <mhabib-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 02:04:30 by youlhafi          #+#    #+#             */
-/*   Updated: 2023/09/24 21:00:09 by youlhafi         ###   ########.fr       */
+/*   Updated: 2023/09/24 22:49:00 by mhabib-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(char *s, unsigned int start, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 int		file_format(char *file, char *format);
 int		file_lenght(char *file);
 char	**read_file(char *file);

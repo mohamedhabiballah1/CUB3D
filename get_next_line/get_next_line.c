@@ -3,97 +3,110 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youlhafi <youlhafi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mhabib-a <mhabib-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 20:42:41 by mhabib-a          #+#    #+#             */
-/*   Updated: 2023/09/24 02:29:46 by youlhafi         ###   ########.fr       */
+/*   Created: 2022/11/08 19:57:44 by youlhafi          #+#    #+#             */
+/*   Updated: 2023/09/24 22:42:46 by mhabib-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-char	*ft_read1(int fd, char *s)
+static char	*ft_free(char *s)
 {
-	ssize_t	sz;
-	char	*buff;
-	char	*tmp;
+	free(s);
+	return (NULL);
+}
 
-	buff = malloc(BUFFER_SIZE + 1);
-	if (buff == NULL)
+static char	*ft_read(int fd, char *s)
+{
+	char	*buff;
+	ssize_t	r_bytes;
+
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
 		return (NULL);
-	sz = 1;
-	while (!ft_strchr(s, '\n') && sz != 0)
-	{
-		sz = read(fd, buff, BUFFER_SIZE);
-		if (sz == -1)
+	r_bytes = 1;
+	while (r_bytes != 0)
+	{	
+		r_bytes = read(fd, buff, BUFFER_SIZE);
+		if (r_bytes == -1)
 		{
-			free(buff);
-			free(s);
-			return (NULL);
+			if (s)
+				free(s);
+			return (ft_free(buff));
 		}
-		buff[sz] = '\0';
-		tmp = s;
+		buff[r_bytes] = 0;
 		s = ft_strjoin(s, buff);
-		free(tmp);
+		if (ft_strchr(s, '\n'))
+			break ;
 	}
-	free(buff);
+	free (buff);
 	return (s);
 }
 
-char	*ft_ol(char *ltr)
+static char	*ft_one_line(char *s)
 {
-	size_t	i;
+	char	*line;
+	int		i;
 
 	i = 0;
-	if (ltr[i] == '\0')
-	{
-		free(ltr);
+	if (s[i] == '\0')
 		return (NULL);
-	}
-	if (!ft_strchr(ltr, '\n'))
-		return (ltr);
-	while (ltr[i] != '\n')
+	while (s[i] != '\n' && s[i])
 		i++;
-	i++;
-	return (ft_substr(ltr, 0, i));
+	line = malloc(sizeof(char) * (i + 2));
+	if (!line)
+		return (ft_free(s));
+	i = 0;
+	while (s[i] != '\n' && s[i])
+	{
+		line[i] = s[i];
+		i++;
+	}
+	if (s[i] == '\n')
+	{
+		line[i] = s[i];
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
 }
 
-char	*ft_left(char *s)
+static char	*ft_left(char *rest)
 {
-	char	*tmp;
-	size_t	i;
+	char	*left;
+	int		i;
+	int		j;
 
 	i = 0;
-	if (!ft_strchr(s, '\n'))
-		return (NULL);
-	while (s[i] != '\n')
+	j = 0;
+	while (rest[i] != '\n' && rest[i])
 		i++;
-	if (s[i + 1] == '\0')
-	{
-		free(s);
-		return (NULL);
-	}
+	if (rest[i] == '\0')
+		return (ft_free(rest));
+	left = malloc(sizeof(char) * (ft_strlen(rest) - i) + 1);
+	if (!left)
+		return (ft_free(rest));
 	i++;
-	tmp = ft_substr(s, i, ft_strlen(s) - i);
-	free(s);
-	return (tmp);
+	while (rest[i])
+		left[j++] = rest[i++];
+	left[j] = '\0';
+	free(rest);
+	return (left);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*ltr;
+	static char	*rest;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
-	{
-		free(ltr);
-		ltr = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	}
-	ltr = ft_read1(fd, ltr);
-	if (!ltr)
+	rest = ft_read(fd, rest);
+	if (!rest)
 		return (NULL);
-	line = ft_ol(ltr);
-	ltr = ft_left(ltr);
+	line = ft_one_line(rest);
+	rest = ft_left(rest);
 	return (line);
 }
