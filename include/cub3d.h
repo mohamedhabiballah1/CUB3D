@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhabib-a <mhabib-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: youlhafi <youlhafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 02:04:30 by youlhafi          #+#    #+#             */
-/*   Updated: 2023/09/24 22:49:00 by mhabib-a         ###   ########.fr       */
+/*   Updated: 2023/09/25 09:28:06 by youlhafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int		keypress(int keycode, t_cub *data);
 double	normalize(double rayAngle);
 void	move_player(t_cub *data);
 int		if_wall(double x, double y, t_cub *data);
-void	draw_floor(t_cub *data);
-void	draw_ceil(t_cub *data);
+void	draw_floor(t_cub *data, int i);
+void	draw_ceil(t_cub *data, int i);
 void	cast_rays(t_cub *data);
 void	vertical_cast(t_cub *data, t_ray *ray);
 void	vertical_cast(t_cub *data, t_ray *ray);

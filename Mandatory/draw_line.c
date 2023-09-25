@@ -6,7 +6,7 @@
 /*   By: youlhafi <youlhafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 22:25:52 by youlhafi          #+#    #+#             */
-/*   Updated: 2023/09/24 20:45:04 by youlhafi         ###   ########.fr       */
+/*   Updated: 2023/09/24 23:12:39 by youlhafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	draw_line(double rayangle, t_ray *ray, t_cub *data, int i)
 {
 	double	wall_dist;
 
-	wall_dist = ray->distance * cos(rayangle - data->player.rotangle);
+	wall_dist = ray->distance * cos(data->player.rotangle - rayangle);
 	data->wall.wall_h = (data->map.tile_size / wall_dist)
 		* data->ray.distprojplane;
 	data->wall.start_x = i;
@@ -86,7 +86,7 @@ void	draw_line(double rayangle, t_ray *ray, t_cub *data, int i)
 	data->wall.end_x = i;
 	data->wall.end_y = (data->win_h / 2) + (data->wall.wall_h / 2);
 	if (data->wall.end_y >= data->win_h)
-		data->wall.end_y = data->win_h - 1.0;
+		data->wall.end_y = data->win_h;
 	get_hit_text(rayangle, ray, data);
 	put_wall(ray, data, ray->text_wallhit);
 }

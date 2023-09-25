@@ -24,7 +24,7 @@ INCLUDES = include/cub3d.h include/define.h include/structers.h
 all :$(NAME)
 
 $(NAME) :$(MOBJ)
-	$(CC) $(MOBJ) -lmlx -framework OpenGL  -framework AppKit -o $(NAME) 
+	$(CC) $(MOBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME) 
 
 bonus :$(NAME_BONUS)
 

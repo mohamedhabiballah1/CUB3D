@@ -6,7 +6,7 @@
 /*   By: youlhafi <youlhafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 22:24:15 by youlhafi          #+#    #+#             */
-/*   Updated: 2023/09/24 01:33:01 by youlhafi         ###   ########.fr       */
+/*   Updated: 2023/09/25 09:01:57 by youlhafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	cast_rays(t_cub *data)
 	while (i < data->ray.num_rays)
 	{
 		init_ray(ray.ray_angle, &ray);
+		draw_floor(data, i);
+		draw_ceil(data, i);
 		dda(&ray, data);
 		draw_line(ray.ray_angle, &ray, data, i);
 		ray.ray_angle = normalize(ray.ray_angle

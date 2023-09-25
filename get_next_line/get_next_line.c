@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhabib-a <mhabib-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: youlhafi <youlhafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:57:44 by youlhafi          #+#    #+#             */
-/*   Updated: 2023/09/24 22:42:46 by mhabib-a         ###   ########.fr       */
+/*   Updated: 2023/09/25 09:27:02 by youlhafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*ft_read(int fd, char *s)
 		return (NULL);
 	r_bytes = 1;
 	while (r_bytes != 0)
-	{	
+	{
 		r_bytes = read(fd, buff, BUFFER_SIZE);
 		if (r_bytes == -1)
 		{

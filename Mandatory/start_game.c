@@ -6,7 +6,7 @@
 /*   By: youlhafi <youlhafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 22:26:26 by youlhafi          #+#    #+#             */
-/*   Updated: 2023/09/24 20:45:04 by youlhafi         ###   ########.fr       */
+/*   Updated: 2023/09/24 23:23:45 by youlhafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	put(t_cub *data)
 			&data->img.pixel_bits, &data->img.line_bytes,
 			&data->img.endian);
 	move_player(data);
-	draw_floor(data);
-	draw_ceil(data);
 	cast_rays(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.ptr, 0, 0);
 	mlx_destroy_image(data->mlx, data->img.ptr);

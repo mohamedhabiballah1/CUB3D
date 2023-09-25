@@ -6,7 +6,7 @@
 /*   By: youlhafi <youlhafi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 22:26:32 by youlhafi          #+#    #+#             */
-/*   Updated: 2023/09/24 02:31:19 by youlhafi         ###   ########.fr       */
+/*   Updated: 2023/09/25 09:40:23 by youlhafi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,10 @@ void	parse(char *file, t_parse *prs)
 		exit(1);
 }
 
-void	leaks()
-{
-	system("leaks cub3D");
-}
-
 int	main(int ac, char **av)
 {
 	t_cub	data;
 
-	atexit(leaks);
 	if (ac == 2)
 	{
 		if (check_file(av[1]))
